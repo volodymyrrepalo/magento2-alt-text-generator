@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="mage_pack_alt_text_status" resource="default" engine="innodb"
+           comment="Holds current alt text situation for all possible target objects.">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar" name="target_type" nullable="false" length="32" comment="Target Object Type Name"/>
+        <column xsi:type="int" name="target_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Target Object ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <column xsi:type="int" name="missing_alt_text_count" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Count of Missing Alt Text"/>
+        <column xsi:type="int" name="generated_alt_text_count" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Count of Generated Alt Text"/>
+        <column xsi:type="varchar" name="state" nullable="false" length="32" comment="State (scheduled, onhold, etc)"/>
+        <column xsi:type="text" name="seo_text" nullable="true" comment="SEO Text"/>
+        <column xsi:type="text" name="scan_info" nullable="true" comment="Scan Info"/>
+        <column xsi:type="text" name="generation_info" nullable="true" comment="Generation Info"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGE_PACK_ALT_TEXT_STATUS_STORE_ID_STORE_STORE_ID"
+                    table="mage_pack_alt_text_status" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="MAGE_PACK_ALT_TEXT_STATUS_TARGET_TYPE_TARGET_ID_STORE_ID">
+            <column name="target_type"/>
+            <column name="target_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="MAGE_PACK_ALT_TEXT_STATUS_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+
+    <table name="mage_pack_alt_text_generated" resource="default" engine="innodb"
+           comment="Stores generated alt text for entities tracked in the mage_pack_alt_text_status table.">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="mage_pack_alt_text_status Record ID"/>
+        <column xsi:type="varchar" name="image_src" nullable="false" length="255" comment="Image Src"/>
+        <column xsi:type="varchar" name="alt_text" nullable="false" length="255" default="" comment="Generated Alt Text"/>
+        <column xsi:type="smallint" name="is_globally_available" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Is Available for All Entities"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="MAGE_PACK_ALT_TEXT_GENERATED_PARENT_ID_MAGE_PACK_ALT_TEXT_STATUS_ENTITY_ID"
+                    table="mage_pack_alt_text_generated" column="parent_id" referenceTable="mage_pack_alt_text_status"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="MAGE_PACK_ALT_TEXT_GENERATED_PARENT_ID_IMAGE_SRC">
+            <column name="parent_id"/>
+            <column name="image_src"/>
+        </constraint>
+        <index referenceId="MAGE_PACK_ALT_TEXT_GENERATED_PARENT_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,43 @@
+{
+    "mage_pack_alt_text_status": {
+        "column": {
+            "entity_id": true,
+            "target_type": true,
+            "target_id": true,
+            "store_id": true,
+            "updated_at": true,
+            "missing_alt_text_count": true,
+            "generated_alt_text_count": true,
+            "state": true,
+            "seo_text": true,
+            "scan_info": true,
+            "generation_info": true
+        },
+        "index": {
+            "MAGE_PACK_ALT_TEXT_STATUS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGE_PACK_ALT_TEXT_STATUS_STORE_ID_STORE_STORE_ID": true,
+            "MAGE_PACK_ALT_TEXT_STATUS_TARGET_TYPE_TARGET_ID_STORE_ID": true
+        }
+    },
+    "mage_pack_alt_text_generated": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "image_src": true,
+            "alt_text": true,
+            "is_globally_available": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGE_PACK_ALT_TEXT_GENERATED_PARENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_D210BEFA71582CFA9825DDB3E0CEEB62": true,
+            "MAGE_PACK_ALT_TEXT_GENERATED_PARENT_ID_IMAGE_SRC": true
+        }
+    }
+}

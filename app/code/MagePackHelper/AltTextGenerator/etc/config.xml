@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <alt_text>
+            <general>
+                <enabled_cron_scan>0</enabled_cron_scan>
+            </general>
+            <chat_gpt>
+                <max_generations_per_day>20</max_generations_per_day>
+                <instructions><![CDATA[You are an SEO and accessibility expert.
+Generate descriptive alt text for the provided image.
+
+Rules:
+1. If an image is smaller than 200 pixels in width or height, keep the alt text under 50 characters, avoid adding SEO keywords, and begin it with “Simple symbol.” Always include a brief but meaningful description after this phrase.
+2. Max length: 125 characters.
+3. Accessibility: Describe essential content clearly and objectively for accessibility.
+4. SEO: If the image contains more than a single sign or symbol, naturally include relevant keywords where possible and when it makes sense.
+5. Tone: Neutral, informative, context-appropriate.
+6. Avoid: 'image', 'illustration', 'symbol', decorative/irrelevant details.
+7. Output: Return only the alt text, nothing else.
+]]></instructions>
+            </chat_gpt>
+        </alt_text>
+     </default>
+</config>

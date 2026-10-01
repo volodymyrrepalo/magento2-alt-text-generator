@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MagePackHelper\AltTextGenerator\Api\Data\StatusInterface"
+                type="MagePackHelper\AltTextGenerator\Model\Status"/>
+    <preference for="MagePackHelper\AltTextGenerator\Api\AuditAggregatorInterface"
+                type="MagePackHelper\AltTextGenerator\Model\AuditAggregator"/>
+    <preference for="MagePackHelper\AltTextGenerator\Api\StatusRepositoryInterface"
+                type="MagePackHelper\AltTextGenerator\Model\StatusRepository"/>
+    <preference for="MagePackHelper\AltTextGenerator\Model\GeneratedAltTextRepositoryInterface"
+                type="MagePackHelper\AltTextGenerator\Model\GeneratedAltTextRepository"/>
+    <preference for="MagePackHelper\AltTextGenerator\Model\GeneratedAltTextInterface"
+                type="MagePackHelper\AltTextGenerator\Model\GeneratedAltText"/>
+
+    <type name="MagePackHelper\AltTextGenerator\Api\AuditAggregatorInterface">
+        <arguments>
+            <argument name="dataAccessors" xsi:type="array">
+                <item name="1" xsi:type="object">MagePackHelper\AltTextGenerator\Model\DataAccessor\ProductDescription</item>
+                <item name="2" xsi:type="object">MagePackHelper\AltTextGenerator\Model\DataAccessor\CmsPage</item>
+                <item name="3" xsi:type="object">MagePackHelper\AltTextGenerator\Model\DataAccessor\CmsBlock</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="alttext_status_listing_data_source" xsi:type="string">
+                    MagePackHelper\AltTextGenerator\Model\ResourceModel\Status\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MagePackHelper\AltTextGenerator\Model\ResourceModel\Status\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mage_pack_alt_text_status</argument>
+            <argument name="eventPrefix" xsi:type="string">mage_pack_alt_text_status_collection</argument>
+            <argument name="eventObject" xsi:type="string">mage_pack_alt_text_status_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MagePackHelper\AltTextGenerator\Model\ResourceModel\Status
+            </argument>
+        </arguments>
+    </type>
+</config>

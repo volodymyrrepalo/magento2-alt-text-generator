@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="MagePackHelper\AltTextGenerator\Cron\CheckAltText"
+             method="run"
+             name="scan_html_values_for_missing_alt_text">
+            <schedule>0 3 * * *</schedule>
+        </job>
+    </group>
+</config>

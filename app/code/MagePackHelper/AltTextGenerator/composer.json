@@ -1,0 +1,14 @@
+{
+  "name": "magepackhelper/alt_text_generator",
+  "description": "Monitor and generate alt text for images",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MagePackHelper\\AltTextGenerator\\": ""
+    }
+  }
+}
