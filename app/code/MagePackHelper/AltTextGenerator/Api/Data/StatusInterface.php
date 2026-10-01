@@ -19,7 +19,7 @@ interface StatusInterface
     public const string GENERATION_INFO = 'generation_info';
     public const string ALT_TEXT_GENERATION_ALLOWED = 'alt_text_generation_allowed';
 
-    public function getId(): mixed;
+    public function getId();
 
     public function getTargetType(): string;
     public function setTargetType(string $targetType): StatusInterface;

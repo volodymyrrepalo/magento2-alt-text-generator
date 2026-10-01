@@ -49,6 +49,8 @@ Each row is one content record (product description, CMS page, or CMS block) in 
 
 From a row you can scan again, generate descriptions, or apply them. The same actions are available as mass actions. The edit screen lists each image next to the alt text that was generated for it.
 
+![Screenshot](/grid-demo.png)
+
 ## Configuration
 
 Settings are under **Stores → Configuration → Alt Text Generator**.

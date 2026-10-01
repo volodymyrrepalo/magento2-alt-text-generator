@@ -9,7 +9,7 @@ interface GeneratedAltTextInterface
     public const string ALT_TEXT = 'alt_text';
     public const string IS_GLOBALLY_AVAILABLE = 'is_globally_available';
 
-    public function getId(): mixed;
+    public function getId();
 
     public function getParentId(): int;
     public function setParentId(int $parentId): GeneratedAltTextInterface;
